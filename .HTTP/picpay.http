@@ -1,0 +1,56 @@
+POST http://localhost:8080/users/register
+Content-Type: application/json
+
+{
+  "fullName": "Marcel1",
+  "document": "123.456.789-1",
+  "email": "joao.silva@example.com1",
+  "password": "suaSenhaSegura123",
+  "balance": 1000.00,
+  "userType": "COMMON"
+}
+
+###
+
+# curl --location 'http://localhost:8080/transaction/pay'
+#--header 'Content-Type: application/json'
+#--data '
+#    {
+#        "payee": 2,
+#        "payer": 1,
+#        "amount": 50
+#
+#    }'
+POST http://localhost:8080/transaction/pay
+Content-Type: application/json
+
+
+    {
+        "payee": 2,
+        "payer": 1,
+        "amount": 50
+
+    }
+
+###
+
+# curl --location 'http://localhost:8080/users/register'
+#--header 'Content-Type: application/json'
+#--data-raw '
+#    {
+#        "fullName": "Marcel1",
+#        "document": "123.456.789-1",
+#        "email": "joao.silva@example.com1",
+#        "password": "suaSenhaSegura123",
+#        "balance": 1000.00,
+#        "userType": "COMMON"
+#    }'
+
+
+# curl --location 'http://localhost:8080/users/list'
+#--data ''
+POST http://localhost:8080/users/list
+Content-Type: application/x-www-form-urlencoded
+
+###
+
