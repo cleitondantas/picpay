@@ -1,5 +1,5 @@
 # Usar uma imagem base que inclui o JDK (Java Development Kit)
-FROM openjdk:11-jdk as build
+FROM openjdk:21-jdk as build
 
 # Configura o diretório de trabalho dentro do container
 WORKDIR /app
@@ -10,12 +10,13 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-
+# Adiciona permissão de execução ao mvnw
+RUN chmod +x ./mvnw
 # Compila o projeto
 RUN ./mvnw package -DskipTests
 
 # Usa outra imagem base para a fase de execução para manter o container final mais leve
-FROM openjdk:11-jre
+FROM openjdk:21-jdk
 
 WORKDIR /app
 
