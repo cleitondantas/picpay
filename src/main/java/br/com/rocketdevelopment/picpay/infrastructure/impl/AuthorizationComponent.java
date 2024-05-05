@@ -1,18 +1,20 @@
 package br.com.rocketdevelopment.picpay.infrastructure.impl;
 
+import br.com.rocketdevelopment.picpay.configuration.Config;
 import br.com.rocketdevelopment.picpay.domain.authorization.Authorization;
 import br.com.rocketdevelopment.picpay.exception.ValidadeException;
 import br.com.rocketdevelopment.picpay.infrastructure.Authorizer;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-@Service
-public class AuthorizationService implements Authorizer {
+@Component
+public class AuthorizationComponent implements Authorizer {
+
 
     private final RestClient restClient;
 
-    public AuthorizationService(RestClient.Builder builder) {
-        this.restClient  = builder.baseUrl("https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc").build();
+    public AuthorizationComponent(RestClient.Builder builder, Config config) {
+        this.restClient  = builder.baseUrl(config.getAutorizationServerUrl()).build();
     }
 
     public void validateTransaction() throws Exception {

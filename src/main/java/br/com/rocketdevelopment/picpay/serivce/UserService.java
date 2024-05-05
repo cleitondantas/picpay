@@ -4,6 +4,7 @@ import br.com.rocketdevelopment.picpay.domain.users.User;
 import br.com.rocketdevelopment.picpay.api.dto.UserDTO;
 import br.com.rocketdevelopment.picpay.domain.users.UserType;
 import br.com.rocketdevelopment.picpay.domain.wallet.Wallet;
+import br.com.rocketdevelopment.picpay.exception.UserException;
 import br.com.rocketdevelopment.picpay.exception.ValidadeException;
 import br.com.rocketdevelopment.picpay.repository.UserRepository;
 import lombok.extern.java.Log;
@@ -45,7 +46,7 @@ public class UserService {
         return userDTOS;
     }
     public User getUserById(Long id) throws Exception {
-        return userRepository.findById(id).orElseThrow(() -> new Exception("User not found"));
+        return userRepository.findById(id).orElseThrow(() -> new UserException("User not found"));
 
     }
 

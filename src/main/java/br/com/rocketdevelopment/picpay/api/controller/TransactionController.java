@@ -1,6 +1,7 @@
 package br.com.rocketdevelopment.picpay.api.controller;
 
 import br.com.rocketdevelopment.picpay.api.dto.TransactionDTO;
+import br.com.rocketdevelopment.picpay.exception.TransactionException;
 import br.com.rocketdevelopment.picpay.serivce.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,12 @@ public class TransactionController {
 
 
     @PostMapping("/pay")
-    public ResponseEntity<TransactionDTO> pay(@RequestBody TransactionDTO transactionDTO) {
+    public ResponseEntity<TransactionDTO> pay(@RequestBody TransactionDTO transactionDTO) throws TransactionException {
         TransactionDTO transaction = null;
         try {
             transaction = transactionService.save(transactionDTO);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new TransactionException("Error ao realizar transação");
         }
         return new ResponseEntity<>(transaction, HttpStatus.CREATED);
     }

@@ -1,6 +1,6 @@
 package br.com.rocketdevelopment.picpay.infrastructure;
 
-public interface Notification {
+public interface NotificationProducer {
 
     void send(String message);
 }
