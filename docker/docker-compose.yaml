@@ -30,7 +30,6 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
-      RABBITMQ_SERVER_PROPERTIES_OPTIONS='{"ha-mode": "none"}'
       RABBITMQ_DEFAULT_VHOST: "myvhost"
       RABBITMQ_PRECONFIGURED_VHOSTS: |
         {"myvhost": {

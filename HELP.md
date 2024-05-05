@@ -5,7 +5,6 @@ Abaixo você encontrará todos as informações necessárias para iniciar o seu 
 
 ## Avisos antes de começar
 
-
 - Leia com atenção este documento todo e tente seguir ao **máximo** as instruções;
 - Crie um repositório no seu GitHub **sem citar nada relacionado ao PicPay**;
 - Faça seus commits no seu repositório;
