@@ -6,10 +6,10 @@ WORKDIR /app
 
 # Copia os arquivos de build do projeto (por exemplo, usando Maven ou Gradle)
 # Aqui estamos assumindo que você está usando Maven
-COPY ../mvnw .
-COPY ../.mvn .mvn
-COPY ../pom.xml .
-COPY ../src src
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src src
 # Adiciona permissão de execução ao mvnw
 RUN chmod +x ./mvnw
 # Compila o projeto

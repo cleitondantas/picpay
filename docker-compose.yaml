@@ -1,8 +1,11 @@
-version: "3.9"
+version: "3.3"
+
+networks:
+  app-network:
 
 services:
   app:
-    build: .
+    build: docker
     ports:
       - "8080:8080"
     networks:
