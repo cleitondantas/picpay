@@ -5,7 +5,7 @@ networks:
 
 services:
   app:
-    build: docker
+    build: .
     ports:
       - "8080:8080"
     networks:
@@ -33,16 +33,3 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
-      RABBITMQ_DEFAULT_VHOST: "myvhost"
-      RABBITMQ_PRECONFIGURED_VHOSTS: |
-        {"myvhost": {
-          "exchanges": [
-            {"name": "pagamento-request-exchange", "type": "topic"}
-          ],
-          "queues": [
-            {"name": "pagamento-request-queue", "durable": true, "arguments": {"x-ha-queues": 1}}
-          ],
-          "bindings": [
-            {"source": "myexchange", "destination": "myqueue", "routing_key": "pagamento-request-rout-key"}
-          ]
-        }}
