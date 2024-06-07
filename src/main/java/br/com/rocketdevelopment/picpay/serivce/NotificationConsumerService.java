@@ -6,12 +6,11 @@ import br.com.rocketdevelopment.picpay.domain.notification.Notification;
 import br.com.rocketdevelopment.picpay.exception.NotificationException;
 import br.com.rocketdevelopment.picpay.infrastructure.NotificationConsumer;
 import lombok.extern.java.Log;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-
 import java.util.Objects;
 
 @Service
@@ -24,7 +23,7 @@ public class NotificationConsumerService implements NotificationConsumer {
         this.restClient = builder.baseUrl(config.getNotificationServerUrl()).build();
     }
 
-    @RabbitListener(queues = "pagamento-request-queue")
+    @KafkaListener(topics = "transaction-notification", groupId = "picpay-desafio-backend")
     @Override
     public void consume(Message message) throws NotificationException {
         try {

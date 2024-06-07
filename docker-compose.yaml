@@ -11,25 +11,23 @@ services:
     networks:
       - app-network
     environment:
-      RABBITMQ_HOST: "rabbitmq"
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USERNAME: "guest"
-      RABBITMQ_PASSWORD: "guest"
       AUTORIZATION_SERVER_URL: "https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc"
       NOTIFICATION_SERVER_URL: "https://run.mocky.io/v3/54dc2cf1-3add-45b5-b5a9-6bf7e7f1f4a6"
     depends_on:
-      - rabbitmq
+      - kafka
 
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    hostname: rabbitmq
+  kafka:
+    image: 'bitnami/kafka:latest'
+    hostname: kafka
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - '9094:9094'
     networks:
       - app-network
-    volumes:
-      - ./rabbitmq-data:/var/lib/rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: "guest"
-      RABBITMQ_DEFAULT_PASS: "guest"
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
